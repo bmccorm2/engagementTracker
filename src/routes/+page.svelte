@@ -16,6 +16,7 @@
 			class="hidden-button text-success"
 			data-bs-target="#addEngagement"
 			data-bs-toggle="offcanvas"
+			title="add engagement"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
