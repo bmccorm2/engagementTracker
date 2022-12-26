@@ -5,8 +5,8 @@
 	export let countryOfRisk: String;
 </script>
 
-<div class="card border-success">
-	<div class="card-header text-center bg-success bg-gradient fs-4">Company Details</div>
+<div class="card border-primary">
+	<div class="card-header text-center bg-primary bg-gradient fs-4">Company Details</div>
 	<div class="card-body">
 		<div class="row mb-3">
 			<div class="col d-grid">

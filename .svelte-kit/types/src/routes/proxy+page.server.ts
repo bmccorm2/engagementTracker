@@ -1,6 +1,6 @@
 // @ts-nocheck
 import type { PageServerLoad, Actions } from "./$types";
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import { supabase } from "$lib/supabase";
 
 export const load = (async () => {
@@ -10,6 +10,7 @@ export const load = (async () => {
 			`
       created_at
       ,id
+			,isDone
       ,Engagement_Type (
         description
       ),
@@ -26,8 +27,8 @@ export const load = (async () => {
 		.from("Engagement_Type")
 		.select();
 
-	if (!engagementData || !engagementTypeData)
-		throw error(404, "Error retrieving data from database.");
+	if (engagementError || engagementTypeError)
+		throw error(404, `${engagementError?.message} - ${engagementTypeError?.message}`);
 
 	return { engagementData, engagementTypeData };
 }) satisfies PageServerLoad;
@@ -37,23 +38,35 @@ export const actions = {
 		const formData = await request.formData();
 
 		const ticker = formData.get("security");
-		const { data } = await supabase
+		const { data, error: error1 } = await supabase
 			.from("Security")
 			.select("bbUniqueId")
 			.eq("ticker", ticker)
 			.single();
+
+		if (error1) throw error(505, error1.message);
 		const { bbUniqueId } = data;
 
 		const engagementType = formData.get("engagementType");
-		const { data: data1 } = await supabase
+		const { data: data1, error: error2 } = await supabase
 			.from("Engagement_Type")
 			.select("id")
 			.eq("description", engagementType)
 			.single();
-		const { id: engagementTypeId } = data1;
-		console.log(engagementTypeId);
 
-		const { error } = await supabase.from("Engagement").insert({ bbUniqueId, engagementTypeId });
+		if (error2) throw error(505, error2.message);
+		const { id: engagementTypeId } = data1;
+
+		const { error: error3, data: data2 } = await supabase
+			.from("Engagement")
+			.insert({ bbUniqueId, engagementTypeId })
+			.select("id")
+			.single();
+
+		if (error3) throw error(505, error3.message);
+		const { id: newId } = data2;
+
+		throw redirect(303, `engagement/${newId}`);
 	},
 };
 ;null as any as Actions;

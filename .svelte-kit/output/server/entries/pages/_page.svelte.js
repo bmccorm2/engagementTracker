@@ -1,7 +1,7 @@
 import { c as create_ssr_component, d as compute_rest_props, e as escape, f as add_attribute, h as each, i as spread, j as escape_attribute_value, k as escape_object, v as validate_component } from "../../chunks/index.js";
 import "../../chunks/uneval.js";
 const SimpleAutocomplete_svelte_svelte_type_style_lang = "";
-const css$2 = {
+const css$1 = {
   code: '.autocomplete.svelte-75ckfb.svelte-75ckfb{min-width:200px;display:inline-block;max-width:100%;position:relative;vertical-align:top;height:2.25em}.autocomplete.svelte-75ckfb.svelte-75ckfb:not(.hide-arrow):not(.is-loading)::after{border:3px solid;border-radius:2px;border-right:0;border-top:0;content:" ";display:block;height:0.625em;margin-top:-0.4375em;pointer-events:none;position:absolute;top:50%;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:center;transform-origin:center;width:0.625em;border-color:#3273dc;right:1.125em;z-index:4}.autocomplete.show-clear.svelte-75ckfb.svelte-75ckfb:not(.hide-arrow)::after{right:2.3em}.autocomplete.svelte-75ckfb .svelte-75ckfb{box-sizing:border-box}.autocomplete-input.svelte-75ckfb.svelte-75ckfb{font:inherit;width:100%;height:100%;padding:5px 11px}.autocomplete.svelte-75ckfb:not(.hide-arrow) .autocomplete-input.svelte-75ckfb{padding-right:2em}.autocomplete.show-clear.svelte-75ckfb:not(.hide-arrow) .autocomplete-input.svelte-75ckfb{padding-right:3.2em}.autocomplete.hide-arrow.show-clear.svelte-75ckfb .autocomplete-input.svelte-75ckfb{padding-right:2em}.autocomplete-list.svelte-75ckfb.svelte-75ckfb{background:#fff;position:relative;width:100%;overflow-y:auto;z-index:99;padding:10px 0;top:0px;border:1px solid #999;max-height:calc(15 * (1rem + 10px) + 15px);user-select:none}.autocomplete-list.svelte-75ckfb.svelte-75ckfb:empty{padding:0}.autocomplete-list-item.svelte-75ckfb.svelte-75ckfb{padding:5px 15px;color:#333;cursor:pointer;line-height:1}.autocomplete-list-item.confirmed.svelte-75ckfb.svelte-75ckfb{background-color:#789fed;color:#fff}.autocomplete-list-item.selected.svelte-75ckfb.svelte-75ckfb{background-color:#2e69e2;color:#fff}.autocomplete-list-item-no-results.svelte-75ckfb.svelte-75ckfb{padding:5px 15px;color:#999;line-height:1}.autocomplete-list-item-create.svelte-75ckfb.svelte-75ckfb{padding:5px 15px;line-height:1}.autocomplete-list-item-loading.svelte-75ckfb.svelte-75ckfb{padding:5px 15px;line-height:1}.autocomplete-list.hidden.svelte-75ckfb.svelte-75ckfb{visibility:hidden}.autocomplete.show-clear.svelte-75ckfb .autocomplete-clear-button.svelte-75ckfb{cursor:pointer;display:block;text-align:center;position:absolute;right:0.1em;padding:0.3em 0.6em;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%);z-index:4}.autocomplete.svelte-75ckfb:not(.show-clear) .autocomplete-clear-button.svelte-75ckfb{display:none}.autocomplete.svelte-75ckfb select.svelte-75ckfb{display:none}.autocomplete.is-multiple.svelte-75ckfb .input-container.svelte-75ckfb{height:auto;box-shadow:inset 0 1px 2px rgba(10, 10, 10, 0.1);border-radius:4px;border:1px solid #b5b5b5;padding-left:0.4em;padding-right:0.4em;display:flex;flex-wrap:wrap;align-items:stretch;background-color:#fff}.autocomplete.is-multiple.svelte-75ckfb .tag.svelte-75ckfb{display:flex;margin-top:0.5em;margin-bottom:0.3em}.autocomplete.is-multiple.svelte-75ckfb .tag.is-delete.svelte-75ckfb{cursor:pointer}.autocomplete.is-multiple.svelte-75ckfb .tags.svelte-75ckfb{margin-right:0.3em;margin-bottom:0}.autocomplete.is-multiple.svelte-75ckfb .autocomplete-input.svelte-75ckfb{display:flex;width:100%;flex:1 1 50px;min-width:3em;border:none;box-shadow:none;background:none}',
   map: null
 };
@@ -453,7 +453,7 @@ const SimpleAutocomplete = create_ssr_component(($$result, $$props, $$bindings, 
     $$bindings.text(text);
   if ($$props.highlightFilter === void 0 && $$bindings.highlightFilter && highlightFilter !== void 0)
     $$bindings.highlightFilter(highlightFilter);
-  $$result.css.add(css$2);
+  $$result.css.add(css$1);
   {
     searchFunction || prepareListItems();
   }
@@ -540,11 +540,6 @@ const SimpleAutocomplete = create_ssr_component(($$result, $$props, $$bindings, 
 
 `;
 });
-const AddEngagement_svelte_svelte_type_style_lang = "";
-const css$1 = {
-  code: ".sec-details-width.svelte-2plkyk{width:35%}",
-  map: null
-};
 const AddEngagement = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { engagementTypes } = $$props;
   const getSecurities = async (keyword) => {
@@ -555,9 +550,8 @@ const AddEngagement = create_ssr_component(($$result, $$props, $$bindings, slots
   };
   if ($$props.engagementTypes === void 0 && $$bindings.engagementTypes && engagementTypes !== void 0)
     $$bindings.engagementTypes(engagementTypes);
-  $$result.css.add(css$1);
-  return `<div class="${"row"}"><div class="${"col"}"><div class="${"input-group mb-3"}"><span class="${"input-group-text sec-details-width svelte-2plkyk"}" id="${"basic-addon3"}">Security</span>
-			${validate_component(SimpleAutocomplete, "AutoComplete").$$render(
+  return `<form action="${"?/create"}" method="${"post"}"><div class="${"card border-primary"}"><div class="${"card-header text-center bg-primary bg-gradient fs-4"}">New Engagement</div>
+		<div class="${"card-body"}"><div class="${"row"}"><div class="${"col text-center"}">${validate_component(SimpleAutocomplete, "AutoComplete").$$render(
     $$result,
     {
       searchFunction: getSecurities,
@@ -567,62 +561,68 @@ const AddEngagement = create_ssr_component(($$result, $$props, $$bindings, slots
       showClear: true,
       hideArrow: true,
       showLoadingIndicator: true,
+      placeholder: "Security",
+      required: true,
       name: "security"
     },
     {},
     {}
-  )}</div></div></div>
-<div class="${"row"}"><div class="${"col"}"><div class="${"input-group mb-3"}"><span class="${"input-group-text sec-details-width svelte-2plkyk"}" id="${"basic-addon3"}">Engagement Type</span>
-			${validate_component(SimpleAutocomplete, "AutoComplete").$$render(
+  )}</div></div>
+			<div class="${"row"}"><div class="${"col mt-2 text-center"}">${validate_component(SimpleAutocomplete, "AutoComplete").$$render(
     $$result,
     {
       items: engagementTypes,
       labelFieldName: "description",
       showClear: true,
       hideArrow: true,
-      name: "engagementType"
+      placeholder: "Engagement",
+      name: "engagementType",
+      required: true
     },
     {},
     {}
-  )}</div></div>
-</div>`;
+  )}</div></div></div>
+		<div class="${"card-footer text-center"}"><button class="${"btn btn-danger col-5"}" data-bs-target="${"#addEngagement"}" data-bs-toggle="${"offcanvas"}" type="${"reset"}">Cancel</button>
+			<button class="${"btn btn-primary col-5"}" data-bs-target="${"#addEngagement"}" data-bs-toggle="${"offcanvas"}">Add</button></div></div></form>`;
+});
+const EngagementTable = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+  let { engagementData } = $$props;
+  if ($$props.engagementData === void 0 && $$bindings.engagementData && engagementData !== void 0)
+    $$bindings.engagementData(engagementData);
+  return `<table class="${"table table-striped table-hover"}"><thead><tr><th scope="${"col"}">#</th>
+			<th scope="${"col"}">Ticker</th>
+			<th scope="${"col"}">Company</th>
+			<th scope="${"col"}">Engagement</th>
+			<th scope="${"col"}">Date Started</th></tr></thead>
+	<tbody>${each(engagementData, ({ Security, Engagement_Type, created_at, id }, i) => {
+    return `<tr><td>${escape(i + 1)}</td>
+				<td><a href="${"/engagement/" + escape(id, true)}">${escape(Security?.ticker)}
+					</a></td>
+				<td>${escape(Security?.companyName)}</td>
+				<td>${escape(Engagement_Type?.description)}</td>
+				<td>${escape(created_at.split("T")[0])}</td>
+			</tr>`;
+  })}</tbody></table>`;
 });
 const _page_svelte_svelte_type_style_lang = "";
 const css = {
-  code: "#addButton.svelte-13ah7vr{border:0px;background-color:transparent}",
+  code: ".hidden-button.svelte-n96312{border:0px;background-color:transparent}",
   map: null
 };
 const Page = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
-  let engagementModal;
   if ($$props.data === void 0 && $$bindings.data && data !== void 0)
     $$bindings.data(data);
   $$result.css.add(css);
   return `<div class="${"row"}"><div class="${"col-11 text-center"}"><h1>Engagements</h1></div>
-	<div class="${"col text-end align-self-center"}"><button id="${"addButton"}" style="${""}" data-bs-toggle="${"modal"}" data-bs-target="${"#addEngagementModal"}" class="${"svelte-13ah7vr"}"><svg xmlns="${"http://www.w3.org/2000/svg"}" width="${"32"}" height="${"32"}" fill="${"currentColor"}" class="${"bi bi-plus-circle"}" viewBox="${"0 0 16 16"}"><path d="${"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"}"></path><path d="${"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"}"></path></svg></button></div>
+	
+	<div class="${"col align-self-center"}"><button class="${"hidden-button text-success svelte-n96312"}" data-bs-target="${"#addEngagement"}" data-bs-toggle="${"offcanvas"}"><svg xmlns="${"http://www.w3.org/2000/svg"}" width="${"32"}" height="${"32"}" fill="${"currentColor"}" class="${"bi bi-plus-circle"}" viewBox="${"0 0 16 16"}"><path d="${"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"}"></path><path d="${"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"}"></path></svg></button></div>
 	<hr></div>
-<div class="${"row "}"><div class="${"col"}"><table class="${"table table-striped table-hover"}"><thead><tr><th scope="${"col"}">#</th>
-					<th scope="${"col"}">Ticker</th>
-					<th scope="${"col"}">Company</th>
-					<th scope="${"col"}">Engagement</th>
-					<th scope="${"col"}">Date Started</th></tr></thead>
-			<tbody>${each(data.engagementData, ({ Security, Engagement_Type, created_at, id }, i) => {
-    return `<tr><th>${escape(i + 1)}</th>
-						<td><a href="${"/engagement/" + escape(id, true)}">${escape(Security?.ticker)}
-							</a></td>
-						<td>${escape(Security?.companyName)}</td>
-						<td>${escape(Engagement_Type?.description)}</td>
-						<td>${escape(created_at.split("T")[0])}</td>
-					</tr>`;
-  })}</tbody></table></div></div>
+<div class="${"row "}"><div class="${"col"}">${validate_component(EngagementTable, "EngagementTable").$$render($$result, { engagementData: data.engagementData }, {}, {})}</div></div>
 
 
-<form action="${"?/create"}" method="${"post"}"><div class="${"modal fade"}" id="${"addEngagementModal"}" tabindex="${"-1"}" aria-labelledby="${"exampleModalLabel"}" aria-hidden="${"true"}"${add_attribute("this", engagementModal, 0)}><div class="${"modal-dialog"}"><div class="${"modal-content"}"><div class="${"modal-header"}"><h5 class="${"modal-title"}" id="${"exampleModalLabel"}">Add Engagement</h5>
-					<button type="${"button"}" class="${"btn-close"}" data-bs-dismiss="${"modal"}" aria-label="${"Close"}"></button></div>
-				<div class="${"modal-body"}">${validate_component(AddEngagement, "AddEngagement").$$render($$result, { engagementTypes: data.engagementTypeData }, {}, {})}</div>
-				<div class="${"modal-footer"}"><button type="${"button"}" class="${"btn btn-secondary"}" data-bs-dismiss="${"modal"}">Cancel</button>
-					<button type="${"submit"}" class="${"btn btn-primary"}" data-bs-dismiss="${"modal"}">Save</button></div></div></div></div>
-</form>`;
+<div class="${"offcanvas offcanvas-end"}" tabindex="${"-1"}" id="${"addEngagement"}"><div class="${"offcanvas-body mt-3"}">${validate_component(AddEngagement, "AddEngagement").$$render($$result, { engagementTypes: data.engagementTypeData }, {}, {})}</div>
+</div>`;
 });
 export {
   Page as default

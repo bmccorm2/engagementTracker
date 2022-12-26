@@ -1,165 +1,89 @@
 <script lang="ts">
-	import { enhance } from "$app/forms";
-	import { onMount } from "svelte";
 	import type { PageServerData } from "./$types";
+	import Activities from "./Activities.svelte";
+	import Objectives from "./Objectives.svelte";
 	import Security from "./Security.svelte";
 
 	export let data: PageServerData;
-	let objectiveModal: HTMLElement;
-
-	onMount(() => {
-		var myModal = new bootstrap.Modal(objectiveModal, {
-			keyboard: false,
-		});
-		// myModal.show();
-	});
+	let svgSize = 40;
 </script>
 
+<svelte:head>
+	<link rel="stylesheet" href="/global.css" />
+</svelte:head>
+
 <div class="row mt-2">
 	<div class="col">
-		<h1 class="text-center">
-			<u>
-				{data.engagement.Security.companyName}
-			</u>
-		</h1>
+		{#if !data.engagement.isDone}
+			<h1 class="text-center">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={svgSize}
+					height={svgSize}
+					fill="currentColor"
+					class="bi bi-hourglass-split"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1h-11zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2h-7zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48V8.35zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"
+					/>
+				</svg>
+				&nbsp;
+				<u>
+					{data.engagement.Security.companyName}
+				</u>
+			</h1>
+		{:else}
+			<h1 class="text-center text-success">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={svgSize}
+					height={svgSize}
+					fill="currentColor"
+					class="bi bi-check-circle-fill"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+					/>
+				</svg>
+				&nbsp;
+				<u>
+					{data.engagement.Security.companyName}
+				</u>
+			</h1>
+		{/if}
 	</div>
 </div>
+<hr />
 <div class="row mt-4">
-	<div class="col-4">
+	<div class="col-5 v-divide">
+		<h4><small>Status:</small> {data.engagement.isDone ? "Complete" : "In Progress"}</h4>
+		<h4><small>Engagement Type:</small> {data.engagement.Engagement_Type.description}</h4>
+		<form action="?/completeEngagement" method="post">
+			<button
+				class="btn col-12 mt-5"
+				class:btn-success={data.engagement.isDone}
+				class:btn-warning={!data.engagement.isDone}
+				value={String(data.engagement.isDone)}
+				name="isDone">{data.engagement.isDone ? "Mark In Progress" : "Mark Complete"}</button
+			>
+		</form>
+	</div>
+	<div class="col-5 v-divide">
 		<Security {...data.engagement.Security} />
 	</div>
-	<div class="col-6">
-		<h4>Status: {data.engagement.isDone ? "Done" : "In Progress"}</h4>
-		<h4>Engagement Type: {data.engagement.Engagement_Type.description}</h4>
-	</div>
-	<div class="col-2">
-		<ul>
-			<li>
-				<a href="/engagement/timeline/{data.engagementId}">View Timeline</a>
-			</li>
-			<li>
-				<button data-bs-toggle="modal" data-bs-target="#addObjective" class="btn btn-link"
-					>Add Objective</button
-				>
-			</li>
-			<li>
-				<a href="/engagement/timeline/{data.engagementId}">Add Activity</a>
-			</li>
-		</ul>
+	<div class="col-2 text-center">
+		<div>
+			<a href="/engagement/timeline/{data.engagementId}">View Timeline</a>
+		</div>
 	</div>
 </div>
+<hr />
 <div class="row mt-2">
-	<div class="col">
-		<div class="card border-primary">
-			<div class="card-header text-center bg-primary bg-gradient fs-4">Objectives</div>
-			<div class="card-body">
-				<div class="row mb-3">
-					<div class="col">
-						{#if data.objectives.length === 0}
-							<p>
-								No objectives defined. &nbsp;
-								<button data-bs-toggle="modal" data-bs-target="#addObjective" class="btn btn-link"
-									>Add one here.</button
-								>
-							</p>
-						{:else}
-							<ul>
-								{#each data.objectives as objective}
-									<li class:objective-done={objective.Objective.isDone}>
-										<form action="?/completeObjective" method="post" use:enhance>
-											<button class="hidden-button">
-												<input type="hidden" value={objective.Objective.id} name="id" />
-												<input
-													type="checkbox"
-													id={objective.objectiveId.id}
-													checked={objective.Objective.isDone}
-													name="isDone"
-												/>
-											</button>
-											&nbsp;
-											<label for={objective.objectiveId.id}>
-												{objective.Objective.description}
-											</label>
-										</form>
-									</li>
-								{/each}
-							</ul>
-						{/if}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="col"><Objectives objectives={data.objectives} /></div>
 </div>
+<hr />
 <div class="row mt-2">
-	<div class="col">
-		<div class="card border-primary">
-			<div class="card-header text-center bg-primary bg-gradient fs-4">Activities</div>
-			<div class="card-body">
-				<div class="row mb-3">
-					<div class="col">
-						{#if data.activities.length === 0}
-							<p>No activities defined. You can add one.</p>
-						{:else}
-							<ul>
-								{#each data.activities as activity}
-									<li>
-										{activity.type}
-									</li>
-								{/each}
-							</ul>
-						{/if}
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="col"><Activities activities={data.activities} /></div>
 </div>
-
-<!-- Modal -->
-<form action="?/createObjective" method="post" use:enhance>
-	<div
-		class="modal fade"
-		id="addObjective"
-		tabindex="-1"
-		aria-labelledby="exampleModalLabel"
-		aria-hidden="true"
-		bind:this={objectiveModal}
-	>
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Add Objective</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
-				</div>
-				<div class="modal-body">
-					<div class="input-group mb-3">
-						<span class="input-group-text" id="basic-addon1">Description</span>
-						<input type="text" class="form-control" name="description" />
-					</div>
-					<div class="form-check">
-						<input class="form-check-input" type="checkbox" id="isDoneCheck" name="isDone" />
-						<label class="form-check-label" for="isDoneCheck"> Completed </label>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</form>
-
-<style>
-	.objective-done {
-		text-decoration: line-through;
-	}
-	li {
-		list-style-type: none;
-	}
-	.hidden-button {
-		border: 0px;
-		background-color: transparent;
-	}
-</style>

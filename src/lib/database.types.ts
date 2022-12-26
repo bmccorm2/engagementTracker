@@ -11,45 +11,54 @@ export interface Database {
     Tables: {
       Activity: {
         Row: {
-          date: string | null
+          companyAttendees: string | null
+          date: string
           engagementType: string
           id: number
           jhiAttendees: string | null
-          subject: string
+          subject: string | null
         }
         Insert: {
-          date?: string | null
+          companyAttendees?: string | null
+          date: string
           engagementType: string
           id?: number
           jhiAttendees?: string | null
-          subject: string
+          subject?: string | null
         }
         Update: {
-          date?: string | null
+          companyAttendees?: string | null
+          date?: string
           engagementType?: string
           id?: number
           jhiAttendees?: string | null
-          subject?: string
+          subject?: string | null
         }
       }
       Engagement: {
         Row: {
-          bbUniqueId: string | null
+          bbUniqueId: string
           created_at: string
-          engagementTypeId: number | null
+          engagementTypeId: number
           id: number
+          isDone: boolean
+          isDoneDate: string | null
         }
         Insert: {
-          bbUniqueId?: string | null
+          bbUniqueId: string
           created_at?: string
-          engagementTypeId?: number | null
+          engagementTypeId: number
           id?: number
+          isDone?: boolean
+          isDoneDate?: string | null
         }
         Update: {
-          bbUniqueId?: string | null
+          bbUniqueId?: string
           created_at?: string
-          engagementTypeId?: number | null
+          engagementTypeId?: number
           id?: number
+          isDone?: boolean
+          isDoneDate?: string | null
         }
       }
       Engagement_Activity: {
@@ -110,17 +119,20 @@ export interface Database {
         Row: {
           description: string
           id: number
-          isDone: boolean | null
+          isDone: boolean
+          isDoneDate: string | null
         }
         Insert: {
           description: string
           id?: number
-          isDone?: boolean | null
+          isDone?: boolean
+          isDoneDate?: string | null
         }
         Update: {
           description?: string
           id?: number
-          isDone?: boolean | null
+          isDone?: boolean
+          isDoneDate?: string | null
         }
       }
       Security: {
