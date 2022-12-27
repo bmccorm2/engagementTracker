@@ -6,6 +6,11 @@
 	export let data: PageServerData;
 </script>
 
+<svelte:head>
+	<title>List of Engagements</title>
+	<meta name="description" content="A list of all engagements" />
+</svelte:head>
+
 <div class="row">
 	<div class="col-11 text-center">
 		<h1>Engagements</h1>
