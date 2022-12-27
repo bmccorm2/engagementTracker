@@ -5,6 +5,9 @@
 	"/api/security": [
 		"src/routes/api/security/+server.ts"
 	],
+	"/engagement/timelinew3/[id]": [
+		"src/routes/engagement/timelinew3/[id]/+page.server.ts"
+	],
 	"/engagement/timeline/[id]": [
 		"src/routes/engagement/timeline/[id]/+page.server.ts"
 	],
