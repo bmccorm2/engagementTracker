@@ -47,6 +47,14 @@
 				</div>
 			</div>
 		</div>
+		<div class="row mt-3 mb-3">
+			<div class="col ms-3 me-3">
+				<div class="ma-2">
+					<label class="form-label" for="esgSummary">ESG Summary</label>
+					<textarea class="form-control" rows="4" id="esgSummary" name="esgSummary" />
+				</div>
+			</div>
+		</div>
 		<div class="card-footer text-center">
 			<button
 				class="btn btn-danger col-5"

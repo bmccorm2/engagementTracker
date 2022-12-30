@@ -11,6 +11,7 @@ export const load = (async ({ params }) => {
 	    created_at
       ,isDone
 	    ,id
+			,esgSummary
 	    ,Engagement_Type (
 	      description
 	    )

@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { validate_each_argument } from "svelte/internal";
 	import type { PageServerData } from "./$types";
 	import Activities from "./Activities.svelte";
 	import Objectives from "./Objectives.svelte";
 	import Security from "./Security.svelte";
 
 	export let data: PageServerData;
+
 	let svgSize = 40;
 </script>
 
@@ -41,7 +43,7 @@
 					</svg>
 					&nbsp;
 					<u>
-						{data.engagement.Security.companyName}
+						{data.engagement.Security?.companyName}
 					</u>
 				</h1>
 			{:else}
@@ -60,7 +62,7 @@
 					</svg>
 					&nbsp;
 					<u>
-						{data.engagement.Security.companyName}
+						{data.engagement.Security?.companyName}
 					</u>
 				</h1>
 			{/if}
@@ -69,17 +71,51 @@
 	<hr />
 	<div class="row mt-4">
 		<div class="col-5 v-divide">
-			<h4><small>Status:</small> {data.engagement.isDone ? "Complete" : "In Progress"}</h4>
-			<h4><small>Engagement Type:</small> {data.engagement.Engagement_Type.description}</h4>
-			<form action="?/completeEngagement" method="post">
-				<button
-					class="btn col-12 mt-5"
-					class:btn-success={data.engagement.isDone}
-					class:btn-warning={!data.engagement.isDone}
-					value={String(data.engagement.isDone)}
-					name="isDone">{data.engagement.isDone ? "Mark In Progress" : "Mark Complete"}</button
-				>
-			</form>
+			<div class="row">
+				<div class="col">
+					<h4>
+						<small>Status:</small>&nbsp;<span
+							class:text-primary={!data.engagement.isDone}
+							class:text-success={data.engagement.isDone}
+						>
+							{data.engagement.isDone ? "Complete" : "In Progress"}
+						</span>
+					</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h4>
+						<small>Engagement Type:</small>&nbsp;
+						{data.engagement.Engagement_Type?.description}
+					</h4>
+				</div>
+			</div>
+			<div class="row mt-2">
+				<div class="col">
+					<label for="esgSummary">ESG Summary</label>
+					<textarea
+						style="width: 100%;"
+						id="esgSummary"
+						readonly
+						rows="3"
+						value={data.engagement.esgSummary}
+					/>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col">
+					<form action="?/completeEngagement" method="post">
+						<button
+							class="btn col-12"
+							class:btn-success={data.engagement.isDone}
+							class:btn-warning={!data.engagement.isDone}
+							value={String(data.engagement.isDone)}
+							name="isDone">{data.engagement.isDone ? "Mark In Progress" : "Mark Complete"}</button
+						>
+					</form>
+				</div>
+			</div>
 		</div>
 		<div class="col-5 v-divide">
 			<Security {...data.engagement.Security} />

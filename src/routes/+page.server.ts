@@ -56,9 +56,11 @@ export const actions: Actions = {
 		if (error2) throw error(505, error2.message);
 		const { id: engagementTypeId } = data1;
 
+		const esgSummary = formData.get("esgSummary");
+
 		const { error: error3, data: data2 } = await supabase
 			.from("Engagement")
-			.insert({ bbUniqueId, engagementTypeId })
+			.insert({ bbUniqueId, engagementTypeId, esgSummary })
 			.select("id")
 			.single();
 

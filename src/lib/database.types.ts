@@ -35,11 +35,38 @@ export interface Database {
           subject?: string | null
         }
       }
+      countries: {
+        Row: {
+          continent: Database["public"]["Enums"]["continents"] | null
+          id: number
+          iso2: string
+          iso3: string | null
+          local_name: string | null
+          name: string | null
+        }
+        Insert: {
+          continent?: Database["public"]["Enums"]["continents"] | null
+          id?: number
+          iso2: string
+          iso3?: string | null
+          local_name?: string | null
+          name?: string | null
+        }
+        Update: {
+          continent?: Database["public"]["Enums"]["continents"] | null
+          id?: number
+          iso2?: string
+          iso3?: string | null
+          local_name?: string | null
+          name?: string | null
+        }
+      }
       Engagement: {
         Row: {
           bbUniqueId: string
           created_at: string
           engagementTypeId: number
+          esgSummary: string | null
           id: number
           isDone: boolean
           isDoneDate: string | null
@@ -48,6 +75,7 @@ export interface Database {
           bbUniqueId: string
           created_at?: string
           engagementTypeId: number
+          esgSummary?: string | null
           id?: number
           isDone?: boolean
           isDoneDate?: string | null
@@ -56,6 +84,7 @@ export interface Database {
           bbUniqueId?: string
           created_at?: string
           engagementTypeId?: number
+          esgSummary?: string | null
           id?: number
           isDone?: boolean
           isDoneDate?: string | null
@@ -166,7 +195,14 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      continents:
+        | "Africa"
+        | "Antarctica"
+        | "Asia"
+        | "Europe"
+        | "Oceania"
+        | "North America"
+        | "South America"
     }
   }
 }
